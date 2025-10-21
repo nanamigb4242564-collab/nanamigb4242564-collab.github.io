@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>あなたの名前 | PR Writer & Designer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #fff;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: slide 20s linear infinite;
+        }
+        
+        @keyframes slide {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        nav {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 15px;
+        }
+        
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-radius: 25px;
+        }
+        
+        nav a:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        section {
+            margin-bottom: 80px;
+        }
+        
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #667eea;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .profile-image {
+            width: 100%;
+            max-width: 300px;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            color: white;
+            margin: 0 auto;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .skill-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102,126,234,0.2);
+        }
+        
+        .skill-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .skill-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .work-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .work-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102,126,234,0.2);
+        }
+        
+        .work-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+        }
+        
+        .work-content {
+            padding: 25px;
+        }
+        
+        .work-content h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .work-tag {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin: 5px 5px 5px 0;
+            color: #666;
+        }
+        
+        .contact-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        
+        .contact-box h2 {
+            color: white;
+        }
+        
+        .contact-box h2::after {
+            background: white;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-btn {
+            background: white;
+            color: #667eea;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .contact-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            h2 {
+                font-size: 2em;
+            }
+            
+            .skills-grid, .works-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>あなたの名前</h1>
+        <p>PR Writer & Designer | 言葉とデザインで価値を伝える</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#works">Works</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="profile-image">👤</div>
+                <div class="about-text">
+                    <p>はじめまして。PR記事作成を中心に、デザインやコーディングも手がけるクリエイターです。</p>
+                    <p>「言葉で伝える力」と「ビジュアルで魅せる力」を組み合わせ、クライアントの価値を最大限に引き出すコンテンツ制作を得意としています。</p>
+                    <p>現在はPR記事作成をメインに活動しながら、サムネイル制作や動画編集にも携わっています。Webデザイナーとしてのスキルを磨きながら、コーディングスキルも習得中です。</p>
+                    <p><strong>目標：</strong>ライティング、デザイン、コーディングの3つのスキルを掛け合わせた、トータルで価値を提供できるクリエイターへ。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">✍️</div>
+                    <h3>PR記事作成</h3>
+                    <p>企業や商品の魅力を引き出し、読者に響く記事を作成。SEO対策も考慮した戦略的なライティングを行います。</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>グラフィックデザイン</h3>
+                    <p>サムネイル制作を中心に、視覚的に訴求力のあるデザインを提供。ブランドイメージを大切にした制作を心がけています。</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">🎬</div>
+                    <h3>動画編集</h3>
+                    <p>短尺動画の編集経験あり。動きのあるコンテンツで、より強い印象を残す表現を追求しています。</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">💻</div>
+                    <h3>Web開発（習得中）</h3>
+                    <p>HTML/CSS/JavaScriptを学習中。デザインだけでなく実装までできるクリエイターを目指しています。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="works">
+            <h2>Works</h2>
+            <div class="works-grid">
+                <div class="work-item">
+                    <div class="work-image">📝</div>
+                    <div class="work-content">
+                        <h3>PR記事タイトル例</h3>
+                        <p>クライアント名・業界について簡単な説明。どのような課題に対してどんなアプローチで記事を作成したか。</p>
+                        <div>
+                            <span class="work-tag">PR記事</span>
+                            <span class="work-tag">SEO</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="work-item">
+                    <div class="work-image">🖼️</div>
+                    <div class="work-content">
+                        <h3>サムネイル制作事例</h3>
+                        <p>YouTube動画やSNS投稿用のサムネイル制作。クリック率向上を意識したビジュアル設計。</p>
+                        <div>
+                            <span class="work-tag">サムネイル</span>
+                            <span class="work-tag">グラフィック</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="work-item">
+                    <div class="work-image">🎥</div>
+                    <div class="work-content">
+                        <h3>動画編集プロジェクト</h3>
+                        <p>プロモーション動画やSNS用動画の編集。テンポの良い構成とブランドイメージに合わせた演出。</p>
+                        <div>
+                            <span class="work-tag">動画編集</span>
+                            <span class="work-tag">SNS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="work-item">
+                    <div class="work-image">🌐</div>
+                    <div class="work-content">
+                        <h3>このポートフォリオサイト</h3>
+                        <p>自身のスキルをアピールするために制作したポートフォリオサイト。レスポンシブ対応でモダンなデザインを実現。</p>
+                        <div>
+                            <span class="work-tag">Web制作</span>
+                            <span class="work-tag">コーディング</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <div class="contact-box">
+                <h2>Contact</h2>
+                <p style="font-size: 1.2em; margin: 20px 0;">お仕事のご依頼・ご相談はお気軽にどうぞ</p>
+                <div class="contact-links">
+                    <a href="mailto:your.email@example.com" class="contact-btn">📧 Email</a>
+                    <a href="https://twitter.com/yourhandle" class="contact-btn">🐦 Twitter</a>
+                    <a href="https://www.linkedin.com/in/yourprofile" class="contact-btn">💼 LinkedIn</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 あなたの名前. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
